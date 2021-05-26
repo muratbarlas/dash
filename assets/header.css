@@ -1,0 +1,19 @@
+.app-header {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: thin lightgrey solid;
+
+}
+
+.app-header .app-header--title {
+    font-size: 22px;
+    padding-left: 5px;
+}
+
+body {background-color: #111111;}
+
+p {
+  padding-right: 50px;
+}
+
+
