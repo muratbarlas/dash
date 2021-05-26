@@ -7,41 +7,6 @@ import csv
 for filename in os.listdir('/Users/muratbarlas/Desktop/test2'):
     if filename.endswith(".csv"):
 
-             # text = open('/Users/muratbarlas/Desktop/test2/'+ filename, "r")
-             # text = ''.join([i for i in text])
-             # # search and replace the contents
-             # text = text.replace("200402", "4/2/2020")
-             # text = text.replace("200415", "4/15/2020")
-             # text = text.replace("200513", "5/13/2020")
-             # text = text.replace("200527", "5/27/2020")
-             # text = text.replace("200618", "6/18/2020")
-             # text = text.replace("200624", "6/24/2020")
-             # text = text.replace("200716", "7/16/2020")
-             # text = text.replace("200730", "7/30/2020")
-             # text = text.replace("200813", "8/13/2020")
-             # text = text.replace("200827", "8/27/2020")
-             # text = text.replace("200910", "9/10/2020")
-             # text = text.replace("200924", "9/24/2020")
-             # text = text.replace("201008", "10/8/2020")
-             # text = text.replace("201022", "10/22/2020")
-             # text = text.replace("201105", "11/5/2020")
-             # text = text.replace("201119", "11/19/2020")
-             # text = text.replace("201203", "12/3/2020")
-             # text = text.replace("210107", "1/7/2021")
-             # text = text.replace("210121", "1/21/2021")
-             # text = text.replace("210204", "2/4/2021")
-             # text = text.replace("210218", "2/18/2021")
-             #
-             # # output.csv is the output file opened in write mode
-             # x = open('/Users/muratbarlas/Desktop/test2/corrected/'+ 'CORRECTED'+ filename , "w")
-             #
-             # # all the replaced text is written in the output.csv file
-             # x.writelines(text)
-             # x.close()
-
-             # importing the module
-
-
              # making data frame from the csv file
              dataframe = pd.read_csv('/Users/muratbarlas/Desktop/test2/'+filename)
 
@@ -110,7 +75,7 @@ for filename in os.listdir('/Users/muratbarlas/Desktop/test2'):
              dataframe.replace(to_replace=210218,
                                value="2/18/2021",
                                inplace=True)
-             #print(dataframe)
+
 
              # writing  the dataframe to another csv file
              dataframe.to_csv('/Users/muratbarlas/Desktop/test2/corrected/' + 'CORRECTED' + filename,

@@ -14,6 +14,8 @@ from plotly.subplots import make_subplots
 from csv import reader
 from numpy import interp
 
+
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__,
                 external_stylesheets=external_stylesheets)  # external sheets are used to make the main dash background black
@@ -120,6 +122,30 @@ with open('PedStats3.csv', 'r') as read_obj:  # pedstats3 includes summary data 
         if row[0] != "Date":
             apd_dict_new[row[0]] = float(row[4])
 
+
+#### get the values for the boxes at the top
+file2 = open("PedStats3.csv")
+reader2 = reader(file2)
+my_csv = list(reader2)
+line_count= len(my_csv)-1
+apd_most_recent =  float(my_csv[line_count][4])
+apd_difference =  round(float(my_csv[line_count][4]) - float(my_csv[line_count-1][4]), 2)
+if apd_difference > 0:
+    apd_text = "higher"
+else:
+    apd_text = "lower"
+    apd_difference*=-1
+ave_safety_rate_most_recent =  float(my_csv[line_count][2])*100
+ave_safety_rate_dif =  round(ave_safety_rate_most_recent - float(my_csv[line_count-1][2])*100, 2)
+if ave_safety_rate_dif > 0:
+    safety_rate_text = "higher"
+else:
+    safety_rate_text = "lower"
+    ave_safety_rate_dif*=-1
+file2.close()
+
+
+
 # print(apd_dict_new)
 # ---------------------------------------------------------------
 # layout of everything
@@ -140,9 +166,9 @@ app.layout = html.Div([
                  children=[
                      html.H1(["Avg Safety Rate"],
                              style={"color": 'white', 'fontSize': 13, "text-align": "center", "margin-top": 10}),
-                     html.H1(["95.0%"],
+                     html.H1([str(ave_safety_rate_most_recent) + "%"],
                              style={"color": 'white', 'fontSize': 40, "text-align": "center", "font-weight": "bold"}),
-                     html.H1(["0.23% lower than the previous month"],
+                     html.H1([str(ave_safety_rate_dif) +"% "+ str(safety_rate_text)+ " than the previous month"],
                              style={"color": 'white', 'fontSize': 13, "text-align": "center"})
                  ]
                  ),
@@ -151,10 +177,10 @@ app.layout = html.Div([
                  children=[
                      html.H1(["Avg Pedestrian density (peds/frame)"],
                              style={"color": 'white', 'fontSize': 13, "text-align": "center", "margin-top": 10}),
-                     html.H1(["1.23"],
+                     html.H1([str(apd_most_recent)],
                              style={"color": 'white', 'fontSize': 40, "text-align": "center", "font-weight": "bold"}),
 
-                     html.H1(["0.14 higher than the previous month"],
+                     html.H1([str(apd_difference) + " "+ apd_text + " than the previous month"],
                              style={"color": 'white', 'fontSize': 13, "text-align": "center"})
                  ]
                  ),
